@@ -101,18 +101,20 @@ for ($x = 1; $x <= 12; $x++) {
         var chart = new google.visualization.PieChart(document.getElementById('chart_div'));
         chart.draw(data, options);
       }
+      
     </script>
 
     <body>
         <?php require_once('Form/navbar.php') ?>
         <?php require_once('Form/side_bar.php') ?>
         </br>
-       
+          <div class="col-md-12">
+              <div class="content-panel">
             <h2 align="center">User Status At <?php echo $month . ', ' . $year; ?></h2>
-                <table class="table table-bordered table-striped" style="width:100%" align="center">
+                <table class="table" style="width:100%" align="center">
                     <tr>
                         <th width="50%">Username</th>
-                        <th width="50%">Status</th>
+                        <th width="50%"><i class=" fa fa-edit"></i>Status</th>
                     </tr>
                     <?php
                     $stmt2 = $conn->prepare("select * from account where role != 'Admin' and role != 'Staff'");
@@ -121,10 +123,10 @@ for ($x = 1; $x <= 12; $x++) {
                   foreach ($r2 as $r) {
                         if($r['status1']==0 && $r['status']==0  )
                         {
-                            $status = $r['username'].' has no activities for this month!';
+                            $status = '<span class="label label-warning label-mini">'.$r['username'].' has no activities for this month!</span>';
                         }
                         else{
-                            $status = $r['username'].' has some activity!';
+                            $status = '<span class="label label-success label-mini">'.$r['username'].' has some activity!</span>';
                         }
                    ?>    
 
@@ -137,10 +139,11 @@ for ($x = 1; $x <= 12; $x++) {
 
 <?php  } ?>
                 </table>
+          </div></div>
           <hr  width="90%" align="center" />
                 
                 
-                <h2 align="center">User Activities At <?php echo $month . ', ' . $year; ?></h2>
+                <h2 align="center">User Activities Detail At <?php echo $month . ', ' . $year; ?></h2>
       
         <div class="row" >
             <div class="column">
